@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SignIn</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        
+        <style>
+            .cstyleone{
+                margin-left: 30%; 
+                margin-top: 7%;
+            }
+
+            .cstyletwo{
+                margin-left: 65%; 
+                margin-top:-90px;
+            }
+            #bodystyle{
+                background-image: url("signimg.jpg");
+            }
+            #headstyle{
+                background-color:green ;
+                color:white;
+                font-family: Garamond, serif;
+                font-size: 25px;
+            }
+            .button {
+                background-color: #4CAF50;
+                border: 1px solid black;
+                color: white;
+                padding: 7px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 18px;
+                margin: 4px 2px;
+                cursor: pointer;
+                }
+            #msgstyle{
+                color: orange;
+                /* background-color: green; */
+            }
+
+            input[type=text] {
+                width: 40%;
+                padding: 12px 20px;
+                margin: 15px 0;
+                box-sizing: border-box;
+                border: 5px solid green;
+                border-radius: 10px;
+                text-align:center;
+                font-size: 20px;
+                font-family: Garamond, serif;
+                
+            }
+            input[type=password] {
+                width: 40%;
+                padding: 12px 20px;
+                margin: 15px 0;
+                box-sizing: border-box;
+                border: 5px solid green;
+                border-radius: 10px;
+                text-align:center;
+                font-size: 20px;
+                font-family: Garamond, serif;
+                
+            }
+
+        </style>
+    </head>
+    <body id="bodystyle">
+        <div id="hid">
+            <div class="cstyleone">
+                <div class="card text-center" style="width: 27em;">
+                    <div class="card-header" id="headstyle" >
+                        <div ><b>SignIn<br></b></div>
+                        
+                    </div>
+                    <div class="card-body" id="bodystyle" >
+                        <div id="cardone"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="hid">
+            <div class="cstyletwo">
+                <div class="card text-center" style="width: 25rem;">
+                    <div class="card-header" id="headstyle" >
+                        <div ><b>SignUp<br></b></div>
+                        
+                    </div>
+                    <div class="card-body" id="bodystyle" >
+                        <div id="cardtwo" >
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+<script type="text/babel">
+    class SignInClass extends React.Component{
+        constructor(props){
+        super(props);
+        this.state={
+            name: " ",
+            password: " ",
+            message: " "
+
+        };
+        }
+
+        render(){
+            return(
+                <div id="cardone">                       
+                
+                <input onChange={this.nameFn} type="text" id="name" placeholder="Name" required/><br/><br/>
+                <input onChange={this.passwordFn} type="password" id="pwd" placeholder="Password" required/><br/><br/>
+                <button  onClick={this.showMessage}  name="buttonin" class="button">Sign In</button>  
+                <button onClick={this.submit}  name="buttonup" class="button">Sign Up</button> 
+               
+                <div>{this.state.message}</div>                
+                
+                </div>
+            );
+        }
+        nameFn = (ele) => {
+        this.setState({name: ele.target.value});      
+        console.log(this.state.name)       
+
+        }
+
+        passwordFn = (ele) => {
+            this.setState({password: ele.target.value});
+
+        }
+
+        showMessage = () =>{
+            this.setState({
+                message: <div id = "msgstyle"><h2>Hey {this.state.name}<br/>Have a nice Day!</h2></div>                  
+            });
+
+        }
+
+        submit = () =>{
+            document.getElementById('hid').style.display = 'none'
+            document.getElementById('hid').style.display = 'block'
+            document.getElementById('cardone').style.display = 'none'
+            document.getElementById('cardtwo').style.display = 'block'
+            document.getElementById('name').value = ''
+            document.getElementById('password').value = ''
+
+        }
+    
+    }
+</script>
+
+<script type="text/babel">
+    class SignUpClass extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+                Name: "",
+                Password: "",
+                Contact: "",
+                messages: ""
+            }
+        }
+
+        render(){
+            return(
+                <div id="cardtwo"> 
+                    <input onChange={this.nameFn} type="text" id="Name" placeholder="Full Name"/><br/><br/>
+                    <input onChange={this.passwordFn} type="password" id="Password" placeholder="Password"/><br/><br/>
+                    <input onChange={this.setCNumber} type="text" id="mobilenum" placeholder="Mobile Number"/><br/><br/>
+
+                    <button onClick={this.showMessage}  name="buttonup" class="button">Sign Up</button>
+                    
+                    <button onClick={this.submit}  name="buttonin" class="button">Sign In</button>   
+
+                    <div >{this.state.messages}</div>
+                </div>
+            );
+        }
+        nameFn = (ele) => {          
+              this.setState({Name: ele.target.value});         
+
+            }
+
+            passwordFn = (ele) => {
+              this.setState({Password: ele.target.value});
+
+            }
+
+            setCNumber = (ele) => {
+              this.setState({Contact: ele.target.value});
+
+            }
+
+            setDOB = (ele) => {
+              this.setState({
+                  DOB : ele.target.value});
+
+            }
+        
+            showMessage = () =>{
+                this.setState({
+                    messages: <div id = "msgstyle"><h2  id="bye">Thanks for registering <br/>{this.state.Name} !!</h2></div>
+                });
+            }
+
+            submit = () =>{
+                document.getElementById('cardone').style.display = 'block'
+                document.getElementById('cardtwo').style.display = 'none'
+                document.getElementById('Name').value = ''
+                document.getElementById('Password').value = ''
+                document.getElementById('Contact').value = ''
+                
+            }
+        }
+        document.getElementById('cardone').style.display = 'none'
+        ReactDOM.render(<SignUpClass />, document.querySelector("#cardtwo"));
+
+        ReactDOM.render(<SignInClass />, document.querySelector("#cardone"));
+
+    </script>
